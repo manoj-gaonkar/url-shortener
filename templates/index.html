@@ -10,21 +10,25 @@
 <body>
     <div class="w-screen h-screen flex flex-col justify-center items-center ">
         <div class="w-3/4 md:w-2/4 lg:w-1/4  p-6 shadow-lg  rounded ">
-            <form action="" method="post">
+            <form action="" method="post" onsubmit="console.log("okdub");" >
                 {% csrf_token %}
                 <label class=" block text-gray-700 font-bold py-10 text-center text-2xl">URL SHORTENER</label>
                 <input placeholder="enter the long url" type="text"
-                    class="px-5 py-2 outline-none rounded w-full bg-gray-50 " name="longurl">
+                    class="px-5 py-2 outline-none rounded w-full bg-gray-50 " name="longurl" value="{{ valuepost }}">
                 <input type="submit" class="px-3 py-2 mt-5 rounded-md bg-gray-200">
             </form>
     
         </div>
         {% if shorturl %}
         <div class="w-3/4 md:w-2/4 lg:w-1/4 flex mt-16">
-            <input type="text" class="bg-gray-50 p-4 w-full h-12 mr-2 rounded" value="{{ shorturl }}" disabled>
-            <button class="w-1/3 bg-red-200 rounded">Copy</button>
+            <input type="text" class="bg-gray-50 p-4 w-full h-12 mr-2 rounded" value="{{ shorturl }}" disabled id="copytext">
+            <button class="w-1/3 bg-red-200 rounded" onclick="copytoclipboard();">Copy</button>
         </div>
         {% endif %}
+    </div>
+
+    <div class="px-3 py-2 absolute bottom-20 left-2/4 translate-x-[-50%] bg-green-300 rounded " id='copiednotif'>
+      copied to clipboard
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
@@ -36,9 +40,17 @@
         window.location.href('/');
     })
 
-    copytext = document.gelElementById('copybutton');
-    copytext.select();
-    copytext.setSelectionRange(0,10000);
-    navigator.clipboard.writeText(copytext.value);
+    function copytoclipboard(){
+        copytext = document.getElementById('copytext');
+        copytext.select();
+        copytext.setSelectionRange(0,10000);
+        navigator.clipboard.writeText(copytext.value);
+        console.log("find");
+        $('')
+        setTimeout(function(){
+
+        },3000)
+    }
+    
 </script>
 </html>
