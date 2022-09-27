@@ -10,7 +10,7 @@ def index(request):
         shorturl = tiny.tinyurl.short(longurl)
         print(shorturl)
 
-        context = { "shorturl": shorturl, 'valuepost': 'gnadu' }
+        context = { "shorturl": shorturl }
     else:
         context = {}
 
